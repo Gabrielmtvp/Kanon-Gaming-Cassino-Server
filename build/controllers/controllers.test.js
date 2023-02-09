@@ -14,14 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../server"));
-// authController.ts Tests
 describe('given a email and password', () => {
     test('Should respond with a json object contain user data', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(server_1.default).post('/user/authenticate').send({
-            email: 'gabriel@gmail.com',
-            password: '123',
+            email: 'cluster@gmail.com',
+            password: 'cluster@123!',
         });
-        expect(response.body.user).toBeDefined();
+        expect(response.body.userFormatted.user).toBeDefined();
     }));
     test('Should specify json in the content type header', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(server_1.default).post('/user/register').send({
@@ -40,7 +39,6 @@ describe('when the username and password is missing', () => {
         expect(response.statusCode).toBe(400);
     }));
 });
-// slotMachineController.ts Tests
 describe('Requesting rolling the slot machine', () => {
     test('Should respond with a json object slots machine data', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(server_1.default).get('/slotMachine');

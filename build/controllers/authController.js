@@ -30,6 +30,12 @@ routes.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, functio
                 password: hash,
             },
         });
+        yield prisma.cassino.create({
+            data: {
+                userId: user.id,
+                coins: 20,
+            },
+        });
         user.password = 'undefined';
         return res.send({ user });
     }
@@ -44,7 +50,10 @@ routes.post('/authenticate', (req, res) => __awaiter(void 0, void 0, void 0, fun
         if (!email || !password) {
             return res.status(400).send();
         }
-        const user = yield prisma.user.findFirst({ where: { email }, include: { Cassino: true } });
+        const user = yield prisma.user.findFirst({
+            where: { email },
+            include: { Cassino: true },
+        });
         if (!user) {
             return res.status(400).send({ error: 'User not found' });
         }
@@ -52,8 +61,16 @@ routes.post('/authenticate', (req, res) => __awaiter(void 0, void 0, void 0, fun
             return res.status(400).send({ error: 'Invalid password' });
         }
         user.password = 'undefined';
-        const token = jwtToken(user);
-        return res.send({ user, token });
+        const userFormatted = {
+            user: {
+                name: user.name,
+                email: user.email,
+                coins: user.Cassino.coins,
+            },
+            jwtToken,
+        };
+        const token = jwtToken(userFormatted);
+        return res.send({ userFormatted, token });
     }
     catch (err) {
         return res.status(400).send({ error: 'Authenticate Failed' });

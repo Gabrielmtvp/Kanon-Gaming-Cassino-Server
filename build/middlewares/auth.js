@@ -21,12 +21,12 @@ module.exports = (req, res, next) => {
             return res.status(401).send({ error: 'Token malformatted' });
         }
         // Finally, using jwt I'm verifying if the token is valid or not
-        jwt.verify(token, authConfig.secret, (err) => {
+        return jwt.verify(token, authConfig.secret, (err) => {
             if (err)
                 return res.status(401).send({ error: 'Token invalid' });
             return next();
         });
-        return next();
+        // return next();
     }
     catch (err) {
         return res.status(400).send({ error: 'Middleware Failed' });

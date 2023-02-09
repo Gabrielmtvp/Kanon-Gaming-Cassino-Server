@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsnd --exit-child src/server.ts",
-    "vercel-build": "prisma generate && prisma migrate deploy && tsnd --exit-child src/server.ts",
+    "vercel-build": "prisma generate && prisma migrate deploy && tsc",
     "test": "jest",
     "prisma-migrate-dev": "npx prisma migrate dev",
     "lint": "eslint --fix . --ext .ts,.tsx"
