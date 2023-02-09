@@ -15,6 +15,7 @@ const bcrypt = require('bcryptjs');
 const jwtToken = require('../helpers/token');
 const routes = express.Router();
 const prisma = new client_1.PrismaClient();
+routes.get('/', (req, res) => res.send({ ok: 'true' }));
 // Route responsible to handle with the register of the user
 routes.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password, } = req.body;
