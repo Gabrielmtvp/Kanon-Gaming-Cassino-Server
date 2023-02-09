@@ -2,14 +2,14 @@
     "version": 2,
     "builds": [
       {
-        "src": "./public/controllers/authController.js",
-        "use": "@now/node"
+        "src": "./server.js",
+        "use": "@vercel/node"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "./public/controllers/authController.js"
+        "dest": "/"
       }
     ]
   }
