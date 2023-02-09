@@ -9,7 +9,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "./public/server.js"
+        "dest": "./public/controllers/authController.js"
       }
     ]
   }
