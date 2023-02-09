@@ -9,6 +9,8 @@ const jwtToken = require('../helpers/token');
 const routes = express.Router();
 const prisma = new PrismaClient();
 
+routes.get('/', (req: Request, res: Response) => res.send({ok: 'true' }));
+
 // Route responsible to handle with the register of the user
 routes.post('/register', async (req: Request, res: Response) => {
   const {
