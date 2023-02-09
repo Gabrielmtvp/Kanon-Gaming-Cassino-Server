@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "./public/server.js",
+        "src": "./public/controllers/authController.js",
         "use": "@now/node"
       }
     ],
