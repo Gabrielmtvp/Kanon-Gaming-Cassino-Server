@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 
 const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth.json');
+
+const authConfig = '383dd481b031715027fcb6094026dd54';
 
 module.exports = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -26,7 +27,7 @@ module.exports = (req: Request, res: Response, next: NextFunction) => {
     }
 
     // Finally, using jwt I'm verifying if the token is valid or not
-    return jwt.verify(token, authConfig.secret, (err: any) => {
+    return jwt.verify(token, authConfig, (err: any) => {
       if (err) return res.status(401).send({ error: 'Token invalid' });
 
       return next();
