@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 
-const authController = require('./src/api/userController');
-const slotMachineController = require('./src/api/slotMachineController');
+const authController = require('./src/api/usercontroller');
+const slotMachineController = require('./src/api/slotmachinecontroller');
 
 const app = express();
 
