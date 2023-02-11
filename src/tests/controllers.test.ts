@@ -15,7 +15,9 @@ describe('given a email and password', () => {
       email: 'gabrielmtvp@gmail.com',
       password: 'hash',
     });
-    expect(response.headers['content-type']).toEqual(expect.stringContaining('json'));
+    expect(response.headers['content-type']).toEqual(
+      expect.stringContaining('json')
+    );
   });
 });
 

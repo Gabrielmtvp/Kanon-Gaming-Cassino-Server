@@ -8,7 +8,8 @@ module.exports = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
     // Verifying if exists a header
-    if (!authHeader) return res.status(401).send({ error: 'No token provided' });
+    if (!authHeader)
+      return res.status(401).send({ error: 'No token provided' });
 
     // Split token header to validate the both parts
     const parts = authHeader.split(' ');
