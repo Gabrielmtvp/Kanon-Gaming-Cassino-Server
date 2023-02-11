@@ -12,7 +12,7 @@ function getHandleFruit(fruits: string[]) {
   return fruits[randomOption];
 }
 
-routes.get('/', async (req: Request, res: Response) => {
+routes.get('/slotMachine', async (req: Request, res: Response) => {
   const rell1 = ['🍒', '🍋', '🍎', '🍋', '🍌', '🍌', '🍋', '🍋'];
   const rell2 = ['🍋', '🍎', '🍋', '🍋', '🍒', '🍎', '🍌', '🍋'];
   const rell3 = ['🍋', '🍎', '🍋', '🍎', '🍒', '🍋', '🍌', '🍋'];

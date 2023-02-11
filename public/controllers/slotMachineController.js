@@ -17,7 +17,7 @@ function getHandleFruit(fruits) {
     const randomOption = Math.floor(Math.random() * fruits.length);
     return fruits[randomOption];
 }
-routes.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+routes.get('/slotMachine', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const rell1 = ['🍒', '🍋', '🍎', '🍋', '🍌', '🍌', '🍋', '🍋'];
     const rell2 = ['🍋', '🍎', '🍋', '🍋', '🍒', '🍎', '🍌', '🍋'];
     const rell3 = ['🍋', '🍎', '🍋', '🍎', '🍒', '🍋', '🍌', '🍋'];

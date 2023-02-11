@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 routes.get('/', (req: Request, res: Response) => res.send({ ok: 'true' }));
 
 // Route responsible to handle with the register of the user
-routes.post('/register', async (req: Request, res: Response) => {
+routes.post('/user/register', async (req: Request, res: Response) => {
   const {
     name, email, password,
   } = req.body;
@@ -46,19 +46,19 @@ routes.post('/register', async (req: Request, res: Response) => {
 });
 
 // Route responsible to handle with the authentication of the user
-routes.post('/authenticate', async (req: Request, res: Response) => {
+routes.post('/user/authenticate', async (req: Request, res: Response) => {
   const { email, password } = req.body;
-
+  console.log('1');
   try {
     if (!email || !password) {
       return res.status(400).send();
     }
-
+    console.log('2');
     const user = await prisma.user.findFirst({
       where: { email },
       include: { Cassino: true },
     });
-
+    console.log('3');
     if (!user) {
       return res.status(400).send({ error: 'User not found' });
     }
@@ -67,7 +67,7 @@ routes.post('/authenticate', async (req: Request, res: Response) => {
       return res.status(400).send({ error: 'Invalid password' });
     }
     user.password = 'undefined';
-
+    console.log('4');
     const userFormatted = {
       user: {
         name: user.name,
@@ -76,9 +76,9 @@ routes.post('/authenticate', async (req: Request, res: Response) => {
       },
       jwtToken,
     };
-
+    console.log('antes token');
     const token: string = jwtToken(userFormatted);
-
+    console.log('depois token');
     return res.send({ userFormatted, token });
   } catch (err) {
     return res.status(400).send({ error: 'Authenticate Failed' });

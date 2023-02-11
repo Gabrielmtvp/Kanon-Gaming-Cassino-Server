@@ -13,8 +13,8 @@ app.use(express_1.default.json());
 // Inserting cors configuration in my express app
 app.use((0, cors_1.default)());
 // Importing routes and inserting in my express app
-app.use('/user', authController);
-app.use('/slotMachine', slotMachineController);
+app.use('user', authController);
+app.use(slotMachineController);
 // Configured port that the server will run
 const port = process.env.PORT || 3333;
 app.listen(port, () => {

@@ -15,9 +15,9 @@ const bcrypt = require('bcryptjs');
 const jwtToken = require('../helpers/token');
 const routes = express.Router();
 const prisma = new client_1.PrismaClient();
-routes.get('/', (req, res) => res.send({ ok: 'true' }));
+routes.get('/user', (req, res) => res.send({ ok: 'true' }));
 // Route responsible to handle with the register of the user
-routes.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+routes.post('register', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password, } = req.body;
     const hash = yield bcrypt.hash(password, 10);
     try {
@@ -47,14 +47,17 @@ routes.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, functio
 // Route responsible to handle with the authentication of the user
 routes.post('/authenticate', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
+    console.log('1');
     try {
         if (!email || !password) {
             return res.status(400).send();
         }
+        console.log('2');
         const user = yield prisma.user.findFirst({
             where: { email },
             include: { Cassino: true },
         });
+        console.log('3');
         if (!user) {
             return res.status(400).send({ error: 'User not found' });
         }
@@ -62,6 +65,7 @@ routes.post('/authenticate', (req, res) => __awaiter(void 0, void 0, void 0, fun
             return res.status(400).send({ error: 'Invalid password' });
         }
         user.password = 'undefined';
+        console.log('4');
         const userFormatted = {
             user: {
                 name: user.name,
@@ -70,7 +74,9 @@ routes.post('/authenticate', (req, res) => __awaiter(void 0, void 0, void 0, fun
             },
             jwtToken,
         };
+        console.log('antes token');
         const token = jwtToken(userFormatted);
+        console.log('depois token');
         return res.send({ userFormatted, token });
     }
     catch (err) {

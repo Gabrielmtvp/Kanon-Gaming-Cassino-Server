@@ -13,8 +13,8 @@ app.use(express.json());
 app.use(cors());
 
 // Importing routes and inserting in my express app
-app.use('/user', authController);
-app.use('/slotMachine', slotMachineController);
+app.use(authController);
+app.use(slotMachineController);
 
 // Configured port that the server will run
 const port = process.env.PORT || 3333;
