@@ -4,8 +4,8 @@ const app = require('../../index');
 describe('given a email and password', () => {
   test('Should respond with a json object contain user data', async () => {
     const response = await request(app).post('/user/authenticate').send({
-      email: 'cluster@gmail.com',
-      password: 'cluster@123!',
+      email: 'gabriel@gmail.com',
+      password: '123',
     });
     expect(response.body.userFormatted.user).toBeDefined();
   });

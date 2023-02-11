@@ -1,11 +1,10 @@
 // Express - Biblioteca para criar o servidor
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import app from '../../index';
 
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const jwtToken = require('../helpers/token');
+const { generateToken } = require('../helpers/jwtToken');
 
 const routes = express.Router();
 const prisma = new PrismaClient();
@@ -49,17 +48,16 @@ routes.post('/user/register', async (req: Request, res: Response) => {
 // Route responsible to handle with the authentication of the user
 routes.post('/user/authenticate', async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log('1');
   try {
     if (!email || !password) {
       return res.status(400).send();
     }
-    console.log('2');
+
     const user = await prisma.user.findFirst({
       where: { email },
       include: { Cassino: true },
     });
-    console.log('3');
+
     if (!user) {
       return res.status(400).send({ error: 'User not found' });
     }
@@ -68,18 +66,18 @@ routes.post('/user/authenticate', async (req: Request, res: Response) => {
       return res.status(400).send({ error: 'Invalid password' });
     }
     user.password = 'undefined';
-    console.log('4');
+
     const userFormatted = {
       user: {
         name: user.name,
         email: user.email,
         coins: user.Cassino!.coins,
       },
-      jwtToken,
+      generateToken,
     };
-    console.log('antes token');
-    const token: string = jwtToken(userFormatted);
-    console.log('depois token');
+
+    const token: string = generateToken(userFormatted);
+
     return res.send({ userFormatted, token });
   } catch (err) {
     return res.status(400).send({ error: 'Authenticate Failed' });
