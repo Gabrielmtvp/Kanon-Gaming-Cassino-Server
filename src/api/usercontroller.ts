@@ -1,6 +1,7 @@
 // Express - Biblioteca para criar o servidor
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import app from '../../index';
 
 const express = require('express');
 const bcrypt = require('bcryptjs');

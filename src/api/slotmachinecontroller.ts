@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-
+import app from '../../index';
 const express = require('express');
 const authMiddleware = require('../middlewares/auth');
 

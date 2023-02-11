@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../server';
+const app = require('../../index');
 
 describe('given a email and password', () => {
   test('Should respond with a json object contain user data', async () => {

@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 
-const authController = require('./controllers/authController');
-const slotMachineController = require('./controllers/slotMachineController');
+const authController = require('./src/api/usercontroller');
+const slotMachineController = require('./src/api/slotmachinecontroller');
 
 const app = express();
 
@@ -22,5 +22,5 @@ app.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });
 
-module.exports = app;
 export default app;
+module.exports = app;
