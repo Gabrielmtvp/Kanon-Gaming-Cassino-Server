@@ -47,17 +47,14 @@ routes.post('register', (req, res) => __awaiter(void 0, void 0, void 0, function
 // Route responsible to handle with the authentication of the user
 routes.post('/authenticate', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
-    console.log('1');
     try {
         if (!email || !password) {
             return res.status(400).send();
         }
-        console.log('2');
         const user = yield prisma.user.findFirst({
             where: { email },
             include: { Cassino: true },
         });
-        console.log('3');
         if (!user) {
             return res.status(400).send({ error: 'User not found' });
         }
@@ -65,7 +62,6 @@ routes.post('/authenticate', (req, res) => __awaiter(void 0, void 0, void 0, fun
             return res.status(400).send({ error: 'Invalid password' });
         }
         user.password = 'undefined';
-        console.log('4');
         const userFormatted = {
             user: {
                 name: user.name,
@@ -74,9 +70,7 @@ routes.post('/authenticate', (req, res) => __awaiter(void 0, void 0, void 0, fun
             },
             jwtToken,
         };
-        console.log('antes token');
         const token = jwtToken(userFormatted);
-        console.log('depois token');
         return res.send({ userFormatted, token });
     }
     catch (err) {
